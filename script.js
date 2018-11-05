@@ -18,10 +18,9 @@ var test_frequencies = [];
 for (var i = 0; i < 30; i++) {
 	var note_frequency = C2 * Math.pow(2, i / 12);
 	var note_name = notes[i % 12];
-	var note_adjustment = 0;
 	var note = { "frequency": note_frequency, "name": note_name };
-	var just_above = { "frequency": note_frequency * Math.pow(2, 1 / 48), "name": note_name, "adjustment:" : " (a bit sharp)" };
-	var just_below = { "frequency": note_frequency * Math.pow(2, -1 / 48), "name": note_name, "adjustment:" : " (a bit sharp)"  };
+	var just_above = { "frequency": note_frequency * Math.pow(2, 1 / 48), "name": note_name + " (a bit sharp)" };
+	var just_below = { "frequency": note_frequency * Math.pow(2, -1 / 48), "name": note_name + " (a bit flat)" };
 	test_frequencies = test_frequencies.concat([ just_below, note, just_above ]);
 }
 
@@ -99,7 +98,6 @@ function interpret_correlation_result(event)
 		var dominant_frequency = test_frequencies[maximum_index];
         console.log(dominant_frequency.name)
         document.getElementById("note-name").textContent = dominant_frequency.name;
-				// document.getElementById("note-adjustment").textContent = dominant_frequency.adjustment;
         document.getElementById("note-frequency").textContent = Math.round(dominant_frequency.frequency) + " Hz";
 
 
@@ -174,8 +172,8 @@ function compute_correlations(timeseries, test_frequencies, sample_rate)
 
 	return amplitudes;
 }
-
+// 
 // var canvas = document.getElementById("myDial");
 // var ctx = canvas.getContext("2d");
 // ctx.fillStyle = "#FF0000";
-// ctx.fillRect();
+// ctx.fillRect()
